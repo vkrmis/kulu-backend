@@ -1,0 +1,28 @@
+immediate
+
+- invert the token storage mech
+- add an endpoint to list all users
+
+
+medium-level
+
+- idiomatize keys consistently
+- add an endpoint to check if org exists
+- more errors cases -
+  - check if user already exists in invite
+  - hash the invite/forgot tokens against email/org/role
+- split role into another table
+- add indexes on join table org_users
+
+
+high-level
+
+- version the api
+- better exception handling
+
+
+Table: Tag
+Columns: TagID, Title
+
+Table: ItemTag
+Columns: ItemID, TagID, priority

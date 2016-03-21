@@ -1,0 +1,52 @@
+{:nomad/environments
+ {"production"
+  {:db-url #nomad/env-var "DATABASE_URL"
+   :aws {:creds {:access-key #nomad/env-var "AWS_ACCESS_KEY",
+                 :secret-key #nomad/env-var "AWS_SECRET_KEY" }
+         :s3 {:bucket-invoices #nomad/env-var "S3_INVOICE_BUCKET"}}
+   :redis-spec {:uri #nomad/env-var "REDISTOGO_URL" :db 14}
+   :web-client-name #nomad/env-var "WEB_CLIENT_NAME"
+   :mailgun {:user "api"
+             :password #nomad/env-var "MAILGUN_API_KEY"}
+   :elasticsearch {:url #nomad/env-var "BONSAI_URL"
+                   :index "kulu_prod"
+                   :shards #nomad/env-var "ES_SHARD_COUNT"}
+   :google   {:client-id #nomad/env-var "GOOGLE_OAUTH_ID"
+              :client-secret #nomad/env-var "GOOGLE_OAUTH_SECRET_KEY"
+              :callback {:domain #nomad/env-var "DOMAIN_URL" :path #nomad/env-var "CALLBACK_PATH"}}
+   :export {:subject "Kulu Data Export "
+                 :body "Hi, Please find the report exported as attached."
+                 :max-page 1000}}
+
+  "dev"
+  {:nomad/private-file #nomad/file "config/kulu-backend-secrets.edn"
+   :placeholder-db-url "postgres://%s:@localhost:5432/kulu_backend_dev"
+   :redis-spec {:host "127.0.0.1" :port 6379 :db 14}
+   :aws {; AWS credentials are read from secret config file.
+         :s3 {:bucket-invoices "dev_kulu_invoices"}}
+   :web-client-name "WEB_CLIENT_NAME"
+   :mailgun {:user "api"
+             :password "MAILGUN_API_KEY"}
+   :elasticsearch {:url "http://localhost:9200/"
+                   :index "kulu_dev"
+                   :shards 5}
+   :google   {:client-id "GOOGLE_OAUTH_ID"
+              :client-secret "GOOGLE_OAUTH_SECRET_KEY"
+              :callback {:domain "http://localhost:3001" :path "/oauth2callback"}}
+   :export {:subject "Kulu Data Export "
+                 :body "Hi, Please find the report exported as attached."
+                 :max-page 1000}}
+
+  "test"
+  {:placeholder-db-url "postgres://%s:@localhost:5432/kulu_backend_test"
+   :aws {:creds {:access-key "DUMMY-KEY",
+                 :secret-key "DUMMY-SECRET"}
+         :s3 {:bucket-invoices "test_kulu_invoices"}}
+   :elasticsearch {:url "http://localhost:9200/"
+                   :index "kulu_test"}
+   :google   {:client-id "GOOGLE_OAUTH_ID"
+              :client-secret "GOOGLE_OAUTH_SECRET_KEY"
+              :callback {:domain "http://localhost:3001" :path "/oauth2callback"}}}
+  :export {:subject "Kulu Data Export "
+                :body "Hi, Please find the report exported as attached."
+                :max-page 1000}}}
