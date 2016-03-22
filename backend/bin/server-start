@@ -1,0 +1,4 @@
+#!/bin/sh
+
+export DATABASE_URL=postgres://$USER\:@localhost:5432/kulu_backend_dev
+lein run -m kulu-backend.web 3001
