@@ -1,0 +1,198 @@
+$nprogress-new-color: #E99002;
+$nprogress-new-z-index: 100;
+
+@media (min-width: 1200px) {
+  .container {
+    width: 100%;
+  }
+}
+
+#nprogress .bar {
+  background: $nprogress-new-color;
+
+  position: fixed;
+  z-index: $nprogress-new-z-index;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: $nprogress-new-z-index;
+  top: 50px;
+  right: 25px;
+}
+
+.expense-doc-container {
+  width: 101%;
+  height: 855px;
+}
+
+.expense-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 855px;
+  max-width: 101%;
+  width: auto !important;
+  height: auto !important;
+}
+
+.current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.table {
+  table-layout: fixed;
+  overflow-wrap: break-word
+}
+
+.welcome-text {
+  margin: 300px auto;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.flash-background {
+  cursor: pointer;
+
+  &.error {
+    background-color: rgb(225, 180, 160);
+  }
+
+  &.notice {
+    background-color: #99C16B;
+  }
+}
+
+.flash-message {
+  color: black;
+  z-index: 999;
+  overflow: hidden;
+  margin: 0 auto;
+  width: 30%;
+
+  p {
+    color: white;
+    font-size: 110%;
+    margin: 15px 0;
+  }
+}
+
+/*!
+ *
+ *  React Simpletabs - Just a simple tabs component built with React
+ *  @version v0.6.1
+ *  @link https://github.com/pedronauck/react-simpletabs
+ *  @license MIT
+ *  @author Pedro Nauck (https://github.com/pedronauck)
+ *
+ */
+.tabs-menu {
+  display: table;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-menu-item {
+  float: left;
+  margin-right: 20px;
+}
+
+.tabs-menu-item a {
+  display: block;
+  color: #A9A9A9;
+}
+
+.tabs-menu-item:not(.is-active) a:hover,
+.tabs-menu-item.is-active a {
+  color: #3498DB;
+}
+
+.tab-panel {
+  padding: 10px 50px;
+}
+
+/* =============================================================================
+  An example of how stylize the tabs
+============================================================================= */
+
+.tabs {
+  margin-top: -50px;
+}
+
+.tabs-navigation {
+  padding: 0 50px;
+}
+
+.tabs-navigation {
+  padding: 0 20px;
+  max-height: 50px;
+  border-bottom: 1px solid #DDD;
+}
+
+.tabs-menu {
+  display: table;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tabs-menu-item {
+  float: left;
+}
+
+.tabs-menu-item a {
+  display: block;
+  padding: 0 40px;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 0;
+  color: #A9A9A9;
+}
+
+.tabs-menu-item:not(.is-active) a:hover {
+  color: $brand-primary;
+}
+
+.tabs-menu-item.is-active a {
+  background: #fff;
+  border: 1px solid #DDD;
+  border-top: 2px solid $brand-primary;
+  border-bottom: 0;
+  color: #333;
+}
+
+.visual_search {
+  .VS-search {
+    .VS-search-box {
+      border-radius: 0 !important;
+      -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+      -webkit-box-shadow: none !important;
+      -moz-box-shadow: none !important;
+      box-shadow: none !important;
+      cursor: text !important;
+      position: relative !important;
+      min-height: 30px !important;
+      height: auto !important;
+    }
+  }
+}
+
+div.ui-datepicker{
+  font-size: 86% !important;
+}
+
+.page-title {
+  color: #d35400;
+  margin-bottom: 25px;
+}

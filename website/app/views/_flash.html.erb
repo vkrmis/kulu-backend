@@ -1,0 +1,9 @@
+<% if notice || alert %>
+  <div class="flash-message">
+    <% if notice %>
+      <p><%= notice %></p>
+    <% elsif alert %>
+      <p><%= alert %></p>
+    <% end %>
+  </div>
+<% end %>

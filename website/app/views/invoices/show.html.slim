@@ -1,0 +1,105 @@
+.well.row
+  - if @invoices.prev_invoice.present?
+    = link_to 'Previous Invoice', "#{invoice_path(@invoices.prev_invoice)}?direction=#{params[:direction]}&order=#{params[:order]}", class: 'expenses-nav-btn btn btn-primary', style: "color:white"
+
+  - if @invoices.next_invoice.present?
+    = link_to 'Next Invoice', "#{invoice_path(@invoices.next_invoice)}?direction=#{params[:direction]}&order=#{params[:order]}", class: 'expenses-nav-btn btn btn-primary', style: "color:white"
+
+  - if @invoice.status == "Recorded"
+    - disabled = 'disabled'
+  - else
+    - disabled = ''
+
+  .span12
+    .invoice-details.col-md-6
+      form.invoice-details-form action="#{invoice_path(@invoice.id)}" data-invoices-url="#{invoice_path(@invoice.id, @page_params)}"
+        input type="hidden" name="invoice[:id]" value="#{@invoice.id}"
+        .invoice-details-fieldset.form-group
+          p.invoice-details-label Merchant Name
+          input.form-control name="invoice[:name]" value="#{@invoice.name}" tabindex=1 class="#{disabled}"
+
+        .invoice-details-fieldset.invoice-details-date-group.form-group
+          p.invoice-details-label Expense Date
+          input.invoice-details-date.form-control name="invoice[:date]" value="#{@invoice.input_date}" placeholder="DD-MM-YYYY" tabindex=2 class="#{disabled}"
+
+        .invoice-details-fieldset
+          p.invoice-details-label Amount
+          = select_tag 'invoice[:currency]', options_for_select(@currencies, @invoice.currency || 'INR'), class: "chosen-select form-control invoice-details-currency #{disabled}", tabindex: 3
+          input.invoice-details-amount name="invoice[:amount]" value="#{@invoice.amount}" tabindex=4 class="#{disabled}"
+
+        .invoice-details-fieldset
+          p.invoice-details-label Expense Type
+          = radio_button_tag 'invoice[:expense_type]', 'Company' , @invoice.expense_type == 'Company', class: 'invoice-details-expense-type', tabindex: 4, class: "#{disabled}"
+          label_tag.invoice-expense-type-label Company
+          = radio_button_tag 'invoice[:expense_type]', 'Reimbursement', @invoice.expense_type == 'Reimbursement', class: 'invoice-details-expense-type', tabindex: 5, class: "#{disabled}"
+          label_tag.invoice-expense-type-label Reimbursement
+
+        .invoice-details-fieldset
+          p.invoice-details-label Conflict
+          = radio_button_tag 'invoice[:conflict]', true , @invoice.conflict? , class: 'invoice-details-expense-type', tabindex: 6, class: "#{disabled}"
+          label_tag.invoice-expense-type-label Yes
+          = radio_button_tag 'invoice[:conflict]', false , !@invoice.conflict? , class: 'invoice-details-expense-type', tabindex: 7, class: "#{disabled}"
+          label_tag.invoice-expense-type-label No
+
+        .invoice-details-fieldset
+          p.invoice-details-label Status
+          = select_tag 'invoice[:status]', options_for_select(@invoice_states, @invoice.status), class: "chosen-select form-control #{disabled}", tabindex: 8
+
+        .invoice-details-fieldset
+          p.invoice-details-label Category
+          = @invoice.category_name
+          = select_tag 'invoice[:category_id]', options_for_select(@categories, @invoice.category_id), class: "chosen-select form-control #{disabled}", tabindex: 9, include_blank: true
+
+        .invoice-details-fieldset
+          p.invoice-details-label Remarks
+          input.form-control name="invoice[:remarks]" value="#{@invoice.remarks}" tabindex=10 class="#{disabled}"
+
+        .invoice-edit-actions
+          - if @invoice.status != "Recorded"
+              input.btn.btn-primary.invoice-edit-submit type='submit' value="Update" tabindex=11
+          - else
+              span.recorded-stub class="hint--top" data-hint="Expense has been recorded and cannot be changed"
+                i.fa.fa-lock.recorded-stub-icon
+                | Recorded
+          = link_to 'Back to list', invoices_path(@page_params), class: 'btn btn-link', tabindex: 12
+          - unless @invoice.status == "Recorded"
+            a.btn.btn-default.invoice-edit-delete data-method="delete" rel="nofollow" tabindex="13" href="#{invoice_path(@invoice.id, @page_params)}"
+              i.fa.fa-trash-o
+
+    .expense-attachment-container.col-md-6
+      .expense-attachment-metadata
+        span
+          | by
+          | &nbsp;
+        span.name
+          = @invoice.user_name
+        span.separator
+          | •
+        span
+          | on
+          | &nbsp;
+        span.created_at
+          = @invoice.submission_date
+
+      - if @invoice.image?
+        div class="expense-image-container"
+          img class="expense-image" src="#{@invoice.attachment_url}"
+      - elsif @invoice.document?
+        iframe class="expense-doc-container" frameBorder="0" src="#{@invoice.attachment_url}"
+
+javascript:
+  new Kulu.InvoiceEdit($(".invoice-details-form"));
+
+  var picker = new Pikaday({
+      field: $('.invoice-details-date')[0],
+      format: 'DD-MM-YYYY'
+  });
+
+  $('.chosen-select').chosen({
+    allow_single_deselect: true,
+    no_results_text: 'No results matched'
+  });
+
+  new Kulu.ExpenseViewer($(".expense-attachment-container"));
+
+  $(".disabled").prop("disabled", true);
