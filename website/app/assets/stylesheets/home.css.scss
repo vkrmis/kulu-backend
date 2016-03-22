@@ -1,0 +1,49 @@
+#file-upload {
+  display: none;
+}
+
+.invoice-file-upload-form {
+  margin: 50px auto 0;
+  width: 500px;
+}
+
+.invoice-file-input-label {
+  display: block;
+  margin: 0 auto;
+  margin-top: 100px;
+}
+
+.invoice-file-upload-progress {
+  display: none;
+  margin: 20px auto 0;
+}
+
+.invoice-list {
+  margin: 50px 0 100px 0;
+}
+
+.has-error .help-block,
+.has-error .control-label,
+.has-error .radio,
+.has-error .checkbox,
+.has-error .radio-inline,
+.has-error .checkbox-inline {
+  color: white;
+  opacity: 0.6;
+}
+
+.panel-title {
+  h3 {
+    font-size: 25px;
+    display: inline-block;
+  }
+
+  span {
+    font-size: 13px;
+    text-decoration: underline;
+    margin-left: 10px;
+    a {
+      color: whitesmoke;
+    }
+  }
+}

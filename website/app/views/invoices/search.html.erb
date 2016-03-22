@@ -1,0 +1,55 @@
+<br/>
+<br/>
+<br/>
+
+<h1 class="page-title">
+  Search
+</h1>
+
+<form id="search-form" action=<%= "#{search_invoices_path}" %> method="get">
+  <%= hidden_field_tag :q, params[:q], disabled: true %>
+  <%= hidden_field_tag :name, params[:name], disabled: true %>
+  <%= hidden_field_tag :to_date, params[:to_date], disabled: true %>
+  <%= hidden_field_tag :from_date, params[:from_date], disabled: true %>
+  <%= hidden_field_tag :to_submission_date, params[:to_submission_date], disabled: true %>
+  <%= hidden_field_tag :from_submission_date, params[:from_submission_date], disabled: true %>
+  <%= hidden_field_tag :currency, params[:currency], disabled: true %>
+  <%= hidden_field_tag :min_amount, params[:min_amount], disabled: true %>
+  <%= hidden_field_tag :max_amount, params[:max_amount], disabled: true %>
+  <%= hidden_field_tag :amount, params[:amount], disabled: true %>
+  <%= hidden_field_tag :expense_type, params[:expense_type], disabled: true %>
+  <%= hidden_field_tag :status, params[:status], disabled: true %>
+  <%= hidden_field_tag :category_name, params[:category], disabled: true %>
+  <%= hidden_field_tag :user_name, params[:spender], disabled: true %>
+  <%= hidden_field_tag :conflict, params[:conflict], disabled: true %>
+
+  <div class="search_query">&nbsp;</div>
+  <div class="visual_search" autofocus></div>
+  <span class="search"><input id="expenses-search" class="btn btn-primary" type="submit" value="Search" tabindex=0></span>
+</form>
+
+<br/>
+
+<%= render 'invoice_list', invoices: @invoices, params: @search %>
+<div class="pagination-per-page">
+  <%= form_tag search_invoices_path, method: :get, id: 'form-per-page', enforce_utf8: false %>
+  <%= hidden_field_tag :page, params[:page] || 1 %>
+  <%= hidden_field_tag :direction, params[:direction] || 'desc' %>
+  <%= hidden_field_tag :order, params[:order] || 'created_at' %>
+  <%= label_tag :per_page, 'Expenses to show per page ' %>
+  &nbsp;
+  &mdash;
+  <%= select_tag :per_page, options_for_select([15, 30, 60, 100], selected: params[:per_page] || Kaminari.config.default_per_page), id: 'per-page' %>
+</div>
+
+<br/>
+<br/>
+<br/>
+
+<%= javascript_tag do %>
+  new Kulu.Paginator($('#form-per-page')).setupPerPageForm();
+
+  $(document).ready(function () {
+    Kulu.search(<%= @params.to_json.html_safe %>);
+  });
+<% end %>

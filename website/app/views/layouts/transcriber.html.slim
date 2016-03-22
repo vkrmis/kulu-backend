@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title Kulu [Transcriber]
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag '/javascripts/pdf'
+    = javascript_include_tag '/javascripts/pdf.worker'
+    = csrf_meta_tags
+
+  body.transcriber
+    nav.navbar.navbar-inverse role="navigation"
+      .navbar-header
+        a.navbar-brand href="#{transcriber_index_path}" Kulu [Transcriber]
+
+    .container
+      == yield

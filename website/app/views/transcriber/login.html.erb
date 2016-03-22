@@ -1,0 +1,27 @@
+<div class="page-wrap">
+  <div class="content">
+    <%= image_tag 'logo.png', class: 'image-logo' %>
+
+    <div class="panel" id="login">
+      <div class="panel-title">
+        <h3>Enter your details</h3>
+      </div>
+
+      <%= form_tag authorize_transcriber_index_path, id: 'login-form', :method => :post do %>
+        <div class="form-group">
+          <%= email_field_tag :user_email, nil, placeholder: 'Email' %>
+        </div>
+
+        <div class="form-group">
+          <%= password_field_tag :password, nil, placeholder: 'Password' %>
+        </div>
+
+        <%= submit_tag 'Come on in' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+  $('.image-logo').show();
+<% end %>
