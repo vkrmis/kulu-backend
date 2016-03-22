@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <EditText
+        android:id="@+id/editComments"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:hint="@string/expense_comment"
+        android:imeOptions="actionDone"
+        android:inputType="text|textAutoCorrect"
+        android:singleLine="true"
+        android:layout_below="@+id/expense_type"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id='@+id/expense_type'
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/datePicker"
+        android:layout_marginBottom="40dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="@string/company"/>
+
+        <RadioButton
+            android:id="@+id/reimbursement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reimbursement"
+            android:layout_above="@+id/editComments"
+            android:layout_below="@+id/company" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/merchantName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="@string/merchant_name"
+        android:inputType="textCapSentences|textAutoCorrect" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tableLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_below="@id/merchantName">
+
+        <Spinner
+            android:id="@+id/currency"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:spinnerMode="dropdown" />
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/currency"
+            android:hint="@string/expense_amount"
+            android:inputType="numberDecimal" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/datePicker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tableLayout1"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/expense_date" />
+</RelativeLayout>
