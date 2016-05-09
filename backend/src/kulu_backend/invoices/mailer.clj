@@ -5,39 +5,26 @@
             [kulu-backend.invoices.messaging :as inv-msg]
             [cheshire.core :as cj :only [decode encode]]
             [clj-http.client :as client]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [mailgun.mail :as mail]
+            [mailgun.util :refer [to-file]]))
+
+(defn- creds [] {:key (cfg/mailgun-pass)
+                 :domain (cfg/web-client-name)})
 
 (defn- uuid [] (str (java.util.UUID/randomUUID)))
-
-(defn download-attachment
-  [url]
-  (log/infof "Downloading file %s" url)
-  (io/input-stream
-   (:body
-    (client/get url
-                {:basic-auth [(cfg/mailgun-user) (cfg/mailgun-pass)]
-                 :socket-timeout 10000
-                 :conn-timeout 10000
-                 :as :byte-array}))))
-
-(defn mailgun-url []
-  (str "https://api:" (cfg/mailgun-pass) "@api.mailgun.net/v2/" (cfg/web-client-name) "/messages"))
 
 (defn mailgun-send-from []
   (str "no-reply@" (cfg/web-client-name)))
 
 (defn send-mail
-  ([subject to body]  (let [mail-params {:from (mailgun-send-from)
-                                         :to to
-                                         :subject subject
-                                         :html body}]
-                        (client/post (mailgun-url) {:form-params mail-params})))
-  ([subject to body attachment]  (let [mail-params [{:name "from" :content (mailgun-send-from)}
-                                                    {:name "to" :content to}
-                                                    {:name "subject" :content subject}
-                                                    {:name "html" :content body}
-                                                    {:name "attachment" :content (clojure.java.io/file attachment)}]]
-                                   (client/post (mailgun-url) {:multipart mail-params}))))
+  [subject to body & attachments]
+  (let [message {:from (mailgun-send-from)
+                 :to to
+                 :subject subject
+                 :html body
+                 :attachment (to-file attachments)}]
+    (mail/send-mail (creds) message)))
 
 (defn- parse-subject
   [subject-header]
@@ -69,5 +56,6 @@ and queues it to be later downloaded and stored to S3"
 (defn write
   [{:keys [url] :as m}]
   (let [attachment (when url
-                     (download-attachment url))]
+                     (log/infof "Downloading file %s" url)
+                     (mail/download-attachment (creds) url))]
     (inv-msg/write attachment m)))
