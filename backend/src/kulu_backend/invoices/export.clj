@@ -70,8 +70,8 @@
   (let [today (time-f/unparse-local (time-f/formatter "Y-MM-dd") (time/today))
         search-query (construct-search-query params)
         search-query-count (count search-query)
-        wb (excel/create-workbook "Expences" search-query)
-        sheet (excel/select-sheet "Expences" wb)
+        wb (excel/create-workbook "Expenses" search-query)
+        sheet (excel/select-sheet "Expenses" wb)
         header-row (first (excel/row-seq sheet))
         filename (.getAbsolutePath (java.io.File/createTempFile  (str "Kulu_Data_Export_" today) ".xlsx"))]
     (excel/set-row-style! header-row (excel/create-cell-style! wb {:background :yellow,
