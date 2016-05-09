@@ -38,7 +38,9 @@
                  [org.clojure/core.incubator "0.1.3"]
                  [org.clojure/tools.nrepl "0.2.10"]
                  [cider/cider-nrepl "0.8.2"]
-                 [dk.ative/docjure "1.10.0"]]
+                 [dk.ative/docjure "1.10.0"]
+
+                 [nilenso/mailgun "0.2.2"]]
 
   :plugins [[lein-ring "0.8.11"]
             [clj-sql-up "0.3.7"]]
