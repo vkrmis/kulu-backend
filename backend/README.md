@@ -32,21 +32,6 @@ DATABASE_URL=postgres://$USER\:@localhost:5432/kulu_backend_dev lein clj-sql-up 
 
 ### Running
 
-#### All in one
-
-The easiest thing to do is to let foreman manage the processes:
-
-+ Install `ruby` with rbenv/rvm, if you don't have it already
-  ([version](.ruby-version)).
-+ `gem install bundler` if you have a new ruby install from the above step.
-+ `bundle install` to install foreman.
-+ `PORT=3001 NREPL_PORT=3002 bundle exec foreman start` to start all the process
-
-#### Run specific processes
-
-You can also run specific processes seperately:
-
-##### server
 In dev, run `bin/server-start`. It sets up some needed env vars and
 starts the server with lein. Or you can directly run `lein run -m kulu-backend.web 3001
 ` (takes defaults for the env vars).
@@ -106,10 +91,6 @@ See the AWS Console's IAM tab (for bills@nilenso.com) for the various
 IAM accounts we use. Similarly we have separate S3 buckets and SQS
 queues for dev/prod and IAM account's permissions make sure that the
 dev AWS IAM account can't read/write from the prod resources and vice-versa.
-
-#### Mailgun
-
-TODO
 
 #### ElasticSearch
 
