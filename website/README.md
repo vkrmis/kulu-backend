@@ -4,6 +4,15 @@ The webapp for the Kulu app.
 
 ## Set up
 
++ Install `ruby` with rbenv/rvm, if you don't have it already
+  ([version](.ruby-version)).
++ `gem install bundler` if you have a new ruby install from the above step.
++ `bundle install` to install the required gems.
++ `npm install` to install all the js requisites.
++ run `bin/rails server` to the start the server
+
+Once started visit [http://localhost:3000](http://localhost:3000)
+
 ### AWS S3 CORS permissions
 
 The JS in the app directly uploads files into S3. For this to work,
@@ -27,7 +36,7 @@ Remember to do this for both dev and prod buckets.
 
 ## Extractor API
 
-The extractor interface, which is used to extract/transcribe expenses for all organizations is separated out from the rest of the code. 
+The extractor interface, which is used to extract/transcribe expenses for all organizations is separated out from the rest of the code.
 As we may not need a different end-point for this to work as it could just be regular user-role later on. For easy removal of this, it's split into these files:
 
 * `models/kulu_service/extractor_api.rb`
