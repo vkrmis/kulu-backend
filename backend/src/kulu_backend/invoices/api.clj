@@ -167,6 +167,7 @@ parses this and enqueues creation of new invoices"
   (let [organization-id (get-in params [:organization :id])
         mail-params (inv-mailer/parse params)
         invoice-params (assoc mail-params :organization-id organization-id)]
+    (log/info "Params %s" params)
     (inv-mailer/write invoice-params)))
 
 (defn next-and-prev-invoices
