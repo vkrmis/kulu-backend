@@ -60,6 +60,8 @@
           organizations (remove nil?
                                 (mapv #(org/lookup-by-email-and-org from %)
                                       org-names))]
+      (log/info "Request Params => %s" params)
+      (log/info "Organization => " org-names organizations from (org/lookup-by-email-and-org from (first org-names)))
       (if (not (empty? (seq organizations)))
         (handler (assoc req :organization (first organizations))) ;; since sending to multiple orgs is not allowed at the moment
         (unauthorized {})))))
