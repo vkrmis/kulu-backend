@@ -163,11 +163,10 @@
   "gets a post request from mailgun for an incoming mail,
 parses this and enqueues creation of new invoices"
   [params]
-  (log/debug "receieved an incoming mail, enqueueing attachments...")
-  (let [organization-id (get-in params [:organization :id])
+  (log/debug "receieved an incoming mail, enqueueing attachments..." params)
+  (let [organization-name (get-in params [:organization :name])
         mail-params (inv-mailer/parse params)
-        invoice-params (assoc mail-params :organization-id organization-id)]
-    (log/info "Params %s" params)
+        invoice-params (assoc mail-params :organization-name organization-name)]
     (inv-mailer/write invoice-params)))
 
 (defn next-and-prev-invoices
