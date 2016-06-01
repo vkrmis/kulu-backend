@@ -24,7 +24,7 @@
 (defn- parse-data
   [data]
   (-> data
-      (select-keys [:organization-id :remarks :date :email :expense_type])
+      (select-keys [:organization-name :remarks :date :email :expense_type])
       (update-in [:date] time-c/to-sql-date)))
 
 (defn write
