@@ -49,4 +49,8 @@ Rails.application.routes.draw do
   get  '/verify_invite/:token', to: 'home#verify_invite'
 
   root 'invoices#dashboard'
+
+  # SSL challenge routes
+  match '.well-known/acme-challenge/cBBQvw-Vx1QrMHbqz7uBcwn1m3Xd4SysWXPySxv-ISM', to: proc { [200, {}, ['cBBQvw-Vx1QrMHbqz7uBcwn1m3Xd4SysWXPySxv-ISM.YN2EhJKL3BuK7ujrd4dJpx7AITY6ExOb79-c24bp3uw']] }
+  match '.well-known/acme-challenge/QkiEREsWVxWjsGT_TK4EpVNc0OqEI6D0Z2QTXiGLfkY', to: proc { [200, {}, ['QkiEREsWVxWjsGT_TK4EpVNc0OqEI6D0Z2QTXiGLfkY.YN2EhJKL3BuK7ujrd4dJpx7AITY6ExOb79-c24bp3uw']] }
 end
