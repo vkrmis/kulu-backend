@@ -51,6 +51,7 @@ Rails.application.routes.draw do
   root 'invoices#dashboard'
 
   # SSL challenge routes
-  match '.well-known/acme-challenge/cBBQvw-Vx1QrMHbqz7uBcwn1m3Xd4SysWXPySxv-ISM', to: proc { [200, {}, ['cBBQvw-Vx1QrMHbqz7uBcwn1m3Xd4SysWXPySxv-ISM.YN2EhJKL3BuK7ujrd4dJpx7AITY6ExOb79-c24bp3uw']] }
-  match '.well-known/acme-challenge/QkiEREsWVxWjsGT_TK4EpVNc0OqEI6D0Z2QTXiGLfkY', to: proc { [200, {}, ['QkiEREsWVxWjsGT_TK4EpVNc0OqEI6D0Z2QTXiGLfkY.YN2EhJKL3BuK7ujrd4dJpx7AITY6ExOb79-c24bp3uw']] }
+  match '.well-known/acme-challenge/bUZKrSTEEz30BiEPGNcjT_C8XmrXHK20EIaxeLqGlL8', to: proc { [200, {}, ['bUZKrSTEEz30BiEPGNcjT_C8XmrXHK20EIaxeLqGlL8.N4qKGVGG3r9ULcTv-zO8He55AkAHLaY2RenlEbSdCBU']] }
+  match '.well-known/acme-challenge/OAjq55RiPkuU0I8i3uf9cMeEhdTJZbssLUw6l5R39Dk', to: proc { [200, {}, ['OAjq55RiPkuU0I8i3uf9cMeEhdTJZbssLUw6l5R39Dk.N4qKGVGG3r9ULcTv-zO8He55AkAHLaY2RenlEbSdCBU']] }
+  match '.well-known/acme-challenge/RyXH9dCATK31lNxy5zANiE7k2-J6dh7SECvMEdfk7Q8', to: proc { [200, {}, ['RyXH9dCATK31lNxy5zANiE7k2-J6dh7SECvMEdfk7Q8.N4qKGVGG3r9ULcTv-zO8He55AkAHLaY2RenlEbSdCBU']] }
 end
