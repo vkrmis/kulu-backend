@@ -1,8 +1,0 @@
-<div class="admin-panel">
-  <%= react_component('Admin', {prerender: true,
-                                auth: {
-                                    organization_name: @organization_name,
-                                    token: current_user_token,
-                                },
-                                admin_root_path: admin_path}) %>
-</div>
