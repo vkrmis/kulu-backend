@@ -142,3 +142,8 @@ to get something like:
 Run `lein test` to run tests. It will automatically set the `NOMAD_ENV=test` and pick up the right configuration.
 
 Make sure you run `elasticsearch` before running tests, as some of the tests in the suite test end-to-end making real calls to ES on a test index.
+
+### Companion Services
+
+The android mobile (one-way upload only) app is here: https://github.com/nilenso/kulu-mobile
+The web ui is here: https://github.com/nilenso/kulu-website
